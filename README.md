@@ -1,7 +1,23 @@
 # Discord Application Bot
-Simple discord application bot, Made in Python
+This is a simple Discord bot that allows users to apply for something by answering a set of questions. The bot records the responses in a JSON file and sends a message to a specified channel with the answers.
+
+## Configuration
+To use the bot, you will need to create a Discord bot account and obtain its token. This can be done through the Discord Developer Portal.
+Once you have the token, replace token in the last line of the code with your bot's token.
+To send the application message to a specific channel, replace the 123456 in the line channel = client.get_channel(123456) with the ID of the channel you want to use.
+
+## TODO:
+- Add Review all Applications
+- Send back Response from Application
+- Remove Application if accepted or declined
+- Add Lock and Unlock Application settings
+
+## USAGE:
+After done setting up the token and channel id, run ?apply and check if the following questions can be answered.
 
 ### FQA:
+
+If you are wondering what the `application.json` file is for, The applications.json file is used to store the responses that users provide during the application process. Each time a user completes an application, their responses are added to a list of applications in the JSON file.
 
 #### How to change the questions?
 
