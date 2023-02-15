@@ -10,9 +10,11 @@ questions = {
     4: "What is your name?"
 }
 max_questions = len(questions)
+is_open = True
 
 @client.event
 async def on_message(message):
+    global is_open
     if not message.content.startswith(prefix) or message.author.bot:
         return
 
@@ -20,6 +22,9 @@ async def on_message(message):
     command = args.pop(0).lower()
 
     if command == 'apply':
+        if not is_open:
+            await message.channel.send("Applications are currently closed.")
+            return
         try:
             user = await message.author.create_dm()
             await user.send("Hey! Your application has started. You have 300 seconds to complete it.")
@@ -58,4 +63,18 @@ async def on_message(message):
         except Exception as e:
             print(e)
 
+    elif command == 'open':
+        if message.author.guild_permissions.administrator:
+            is_open = True
+            await message.channel.send("Applications are now open.")
+        else:
+            await message.channel.send("You do not have permission to use this command.")
+
+    elif command == 'close':
+        if message.author.guild_permissions.administrator:
+            is_open = False
+            await message.channel.send("Applications are now closed.")
+        else:
+            await message.channel.send("You do not have permission to use this command.")
+          
 client.run('token')
